@@ -50,21 +50,17 @@
 <div class="container">
 
     <div class="row">
-
         <div class="col-lg-3">
-
             <h1 class="my-4"></h1>
             <div class="list-group">
                 <a href="#" class="list-group-item">Sweet</a>
                 <a href="#" class="list-group-item">Savory</a>
                 <a href="#" class="list-group-item">Vegan</a>
             </div>
-
         </div>
         <!-- /.col-lg-3 -->
 
         <div class="col-lg-9">
-
             <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -93,29 +89,19 @@
                 </a>
             </div>
 
+            <h2>Basket</h2>
             <div class="row">
                 {{#items}}
                 <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <form method="POST" action="basket">
-                                <input type="hidden" id="id" name="id" value="{{id}}">
-                                <input type="hidden" id="price" name="price" value="{{price}}">
-                                <input type="hidden" id="name" name="name" value="{{name}}">
-                                <input type="hidden" id="description" name="description" value="{{description}}">
-                                <h4 class="card-title">
-                                    <a href="#" class="item-title">{{name}}</a>
-                                </h4>
-                                <h5 class="item-price">{{priceFormatted}}</h5>
-                                <h6 class="card-text">{{description}}</h6>
-                                <input type="submit" value="Add"/>
-                            </form>
-                        </div>
-
-                        <div class="card-footer">
-                            <small class="text-muted">Available soon!</small>
-                        </div>
-                    </div>
+                    <form method="POST" action="basket/delete">
+                        <input type="hidden" id="id" name="id" value="{{key.id}}">
+                        <input type="hidden" id="price" name="price" value="{{key.price}}">
+                        <input type="hidden" id="name" name="name" value="{{key.name}}">
+                        <input type="hidden" id="description" name="description" value="{{key.description}}">
+                        <h4>{{key.name}}</h4>
+                        <h5 class="item-price">{{value}}</h5>
+                        <input type="submit" value="Remove"/>
+                    </form>
                 </div>
                 {{/items}}
             </div>
@@ -123,7 +109,18 @@
 
         </div>
         <!-- /.col-lg-9 -->
-
+        </br>
+        <div>
+            <form method="POST" action="order">
+                <label for="address1">Address 1</label>
+                <input type="text" id="address1" name="address1" />
+                <label for="address2">Address 2</label>
+                <input type="text" id="address2" name="address2"/>
+                <label for="zipcode">Zip code</label>
+                <input type="text" id="zipcode" name="zicode"/>
+                <input type="submit" value="Complete order"/>
+            </form>
+        </div>
     </div>
     <!-- /.row -->
 

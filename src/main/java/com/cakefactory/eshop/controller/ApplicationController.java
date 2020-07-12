@@ -33,7 +33,6 @@ public class ApplicationController {
                 item -> new com.cakefactory.eshop.model.Item(item.getId(),
                         item.getName(), item.getName(), item.getPrice()))
                 .collect(Collectors.toList());
-
         model.addAttribute("items", items);
         model.addAttribute("basket", basket);
         return "index";
@@ -41,8 +40,23 @@ public class ApplicationController {
 
     @PostMapping("/basket")
     public String addBasket(com.cakefactory.eshop.model.Item item) {
-        log.info("Item received: " + item.toString());
-        basket.addItem();
+        log.info("Item added: " + item.toString());
+        basket.addItem(item);
         return "redirect:/";
+    }
+
+    @PostMapping("/basket/delete")
+    public String removeFromBasket(com.cakefactory.eshop.model.Item item) {
+        log.info("Item removed: " + item.toString());
+        basket.removeItem(item);
+        return "redirect:/basket";
+    }
+
+    @GetMapping("/basket")
+    public String basket(Model model) {
+        log.info("basket");
+        model.addAttribute("basket", basket);
+        model.addAttribute("items", basket.items());
+        return "basket";
     }
 }
